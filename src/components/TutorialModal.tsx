@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -32,6 +32,21 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const totalSteps = 5;
@@ -53,13 +68,18 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div id="tutorial-modal-overlay" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
+      <div 
+        id="tutorial-modal-overlay" 
+        onClick={onClose}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md cursor-pointer"
+      >
         <motion.div
+          onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.92, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 10 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="relative w-full max-w-lg md:max-w-xl bg-[#181d1a] border border-[#8ba99b]/30 rounded-3xl p-5 md:p-7 text-[#e0e5e1] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+          className="relative w-full max-w-lg md:max-w-xl bg-[#181d1a] border border-[#8ba99b]/30 rounded-3xl p-5 md:p-7 text-[#e0e5e1] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] cursor-default"
         >
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
@@ -69,7 +89,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
               </div>
               <div>
                 <h3 className="text-lg md:text-xl font-bold text-[#e0e5e1]">How to Play Dual N-Back</h3>
-                <p className="text-xs text-[#6e847c] font-mono">Step {currentStep + 1} of {totalSteps}</p>
+                <p className="text-xs text-[#6e847c]">Step {currentStep + 1} of {totalSteps}</p>
               </div>
             </div>
             
@@ -77,7 +97,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
               id="tutorial-close-btn"
               onClick={onClose}
               className="p-2 rounded-xl text-[#6e847c] hover:text-[#e0e5e1] hover:bg-white/5 transition-colors cursor-pointer"
-              title="Close Tutorial"
+              title="Close Tutorial (Esc)"
             >
               <X className="w-5 h-5" />
             </button>
@@ -112,12 +132,12 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 </div>
 
                 <div className="bg-[#2e3733]/40 border border-white/5 rounded-2xl p-4 space-y-3">
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#6e847c]">The Core Rule (N-Back):</h4>
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6e847c]">The Core Rule (N-Back):</h4>
                   <p className="text-xs md:text-sm text-[#e0e5e1]/80 leading-relaxed">
                     In <strong className="text-[#8ba99b]">2-Back</strong> mode, you compare the CURRENT grid position and letter to what appeared <strong className="text-[#8ba99b]">EXACTLY 2 STEPS AGO</strong>.
                   </p>
 
-                  <div className="grid grid-cols-3 gap-2 pt-2 text-center font-mono text-[11px]">
+                  <div className="grid grid-cols-3 gap-2 pt-2 text-center text-[11px]">
                     <div className="bg-[#1a1f1d] p-2.5 rounded-xl border border-white/5">
                       <span className="text-[#6e847c] block text-[9px] uppercase">Step 1</span>
                       <span className="text-[#e0e5e1] font-bold">Top-Left</span>

@@ -982,10 +982,15 @@ export default function App() {
 
       {/* Top Header Row */}
       <header className="w-full max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl flex items-center justify-between z-10 mb-4 px-2 md:px-4">
-        <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-[#8ba99b] to-[#a8c1b5] bg-clip-text text-transparent">
-            N-Back
-          </h1>
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8ba99b]/25 to-[#8ba99b]/10 border border-[#8ba99b]/30 flex items-center justify-center text-[#8ba99b] font-extrabold text-sm shadow-sm">
+            N
+          </div>
+          <div>
+            <h1 className="text-base font-bold tracking-tight bg-gradient-to-r from-[#8ba99b] to-[#a8c1b5] bg-clip-text text-transparent">
+              N-Back
+            </h1>
+          </div>
         </div>
 
         {/* Header Controls */}
@@ -993,23 +998,11 @@ export default function App() {
           <button
             id="header-tutorial-btn"
             onClick={() => setShowTutorial(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 text-xs font-medium text-[#e0e5e1]/80 hover:text-[#8ba99b] hover:border-[#8ba99b]/30 hover:bg-[#8ba99b]/5 transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-white/10 text-xs font-medium text-[#e0e5e1]/90 hover:text-[#8ba99b] hover:border-[#8ba99b]/30 hover:bg-[#8ba99b]/5 transition-all duration-300 cursor-pointer"
             title="How to Play Tutorial"
           >
-            <HelpCircle className="w-3.5 h-3.5 text-[#8ba99b]" />
-            <span className="hidden sm:inline">How to Play</span>
-          </button>
-
-          <button
-            onClick={() => setIsMuted(!isMuted)}
-            className={`p-2 rounded-xl transition-all duration-300 border ${
-              isMuted
-                ? "border-rose-500/30 text-rose-400 bg-rose-500/5 hover:bg-rose-500/10"
-                : "border-white/5 text-[#e0e5e1]/60 hover:text-[#e0e5e1] hover:bg-white/5"
-            }`}
-            title={isMuted ? "Unmute chimes" : "Mute chimes"}
-          >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            <HelpCircle className="w-4 h-4 text-[#8ba99b]" />
+            <span>How to Play</span>
           </button>
         </div>
       </header>
@@ -1043,8 +1036,18 @@ export default function App() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex flex-col items-center text-center py-4"
+                className="flex flex-col items-center text-center py-2 md:py-4"
               >
+                {/* Home Page Main Title Header */}
+                <div className="flex flex-col items-center mb-6 max-w-lg text-center px-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#e0e5e1]">
+                    Working Memory Training
+                  </h2>
+                  <p className="mt-2 text-xs sm:text-sm text-[#a8b3ad] max-w-sm font-sans leading-relaxed">
+                    Train focus and recall through multi-sensory position, audio, and color signals.
+                  </p>
+                </div>
+
                 {/* Settings Section */}
                 <div className="w-full space-y-4 md:space-y-6 lg:space-y-8 max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl mb-6 bg-[#2e3733]/40 rounded-3xl p-4.5 md:p-6 lg:p-8 border border-white/5">
                   {/* Game Mode Selection */}
@@ -1120,29 +1123,20 @@ export default function App() {
                       className="w-full accent-[#8ba99b] cursor-pointer h-1.5 bg-[#1a1f1d] rounded-lg appearance-none"
                     />
                     <div className="flex justify-between text-[10px] md:text-xs text-[#6e847c] font-mono px-0.5 mt-0.5">
-                      <span>1.5s (Zen master)</span>
+                      <span>1.5s (Faster)</span>
                       <span>4.0s (Relaxed)</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="w-full max-w-xs md:max-w-sm lg:max-w-md flex flex-col sm:flex-row gap-2.5">
-                  <button
-                    id="menu-tutorial-btn"
-                    onClick={() => setShowTutorial(true)}
-                    className="flex-1 py-3.5 md:py-4 px-4 rounded-2xl bg-[#2e3733] hover:bg-white/5 border border-white/10 text-[#e0e5e1] font-semibold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <HelpCircle className="w-4 h-4 text-[#8ba99b]" />
-                    How to Play
-                  </button>
-                  
+                <div className="w-full max-w-sm md:max-w-md lg:max-w-xl">
                   <button
                     id="menu-start-btn"
                     onClick={startNewSession}
-                    className="flex-[2] py-3.5 md:py-4 lg:py-5 px-6 rounded-2xl bg-[#8ba99b] text-[#1a1f1d] font-bold tracking-widest uppercase text-sm md:text-base shadow-lg shadow-[#8ba99b]/20 hover:shadow-[#8ba99b]/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-4 px-6 rounded-2xl bg-[#8ba99b] text-[#1a1f1d] font-bold tracking-wider uppercase text-base shadow-lg shadow-[#8ba99b]/20 hover:shadow-[#8ba99b]/35 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Play className="w-4 h-4 fill-[#1a1f1d]" />
-                    Start
+                    <Play className="w-5 h-5 fill-[#1a1f1d]" />
+                    Start Game
                   </button>
                 </div>
               </motion.div>
