@@ -981,7 +981,7 @@ export default function App() {
       </div>
 
       {/* Top Header Row */}
-      <header className="w-full max-w-md sm:max-w-lg md:max-w-xl flex items-center justify-between z-10 mb-4 px-2 md:px-4">
+      <header className="w-full max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl flex items-center justify-between z-10 mb-4 px-2 md:px-4">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8ba99b]/25 to-[#8ba99b]/10 border border-[#8ba99b]/30 flex items-center justify-center text-[#8ba99b] font-extrabold text-sm shadow-sm">
             N
@@ -1008,7 +1008,7 @@ export default function App() {
       </header>
 
       {/* Main Console Area */}
-      <main className="w-full max-w-md sm:max-w-lg md:max-w-xl flex flex-col items-center justify-center my-auto py-2 z-10">
+      <main className="w-full max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl flex flex-col items-center justify-center my-auto py-2 z-10">
         
         {/* Completely flat, seamless game container integrated into the main background */}
         <div className="w-full relative px-2 py-4 md:py-6">
@@ -1049,7 +1049,7 @@ export default function App() {
                 </div>
 
                 {/* Settings Section */}
-                <div className="w-full space-y-5 max-w-md sm:max-w-lg mb-6 bg-[#212925]/80 rounded-3xl p-5 sm:p-6 border border-white/10 shadow-2xl backdrop-blur-md">
+                <div className="w-full space-y-4 md:space-y-6 lg:space-y-8 max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl mb-6 bg-[#2e3733]/40 rounded-3xl p-4.5 md:p-6 lg:p-8 border border-white/5">
                   {/* Game Mode Selection */}
                   <div className="flex flex-col gap-1.5 pb-2 border-b border-white/5 text-left">
                     <span className="text-[#6e847c] font-mono text-xs uppercase tracking-wider">Training Mode:</span>
@@ -1120,10 +1120,7 @@ export default function App() {
                       step="0.1"
                       value={speedSeconds}
                       onChange={(e) => setSpeedSeconds(parseFloat(e.target.value))}
-                      style={{
-                        "--slider-progress": `${((speedSeconds - 1.5) / (4.0 - 1.5)) * 100}%`
-                      } as React.CSSProperties}
-                      className="w-full cursor-pointer h-2 bg-[#18211d] rounded-lg appearance-none"
+                      className="w-full accent-[#8ba99b] cursor-pointer h-1.5 bg-[#1a1f1d] rounded-lg appearance-none"
                     />
                     <div className="flex justify-between text-[10px] md:text-xs text-[#6e847c] font-mono px-0.5 mt-0.5">
                       <span>1.5s (Faster)</span>
@@ -1132,7 +1129,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="w-full max-w-md sm:max-w-lg">
+                <div className="w-full max-w-sm md:max-w-md lg:max-w-xl">
                   <button
                     id="menu-start-btn"
                     onClick={startNewSession}
