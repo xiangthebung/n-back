@@ -1049,14 +1049,14 @@ export default function App() {
                 </div>
 
                 {/* Settings Section */}
-                <div className="w-full space-y-4 md:space-y-6 lg:space-y-8 max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl mb-6 bg-[#2e3733]/40 rounded-3xl p-4.5 md:p-6 lg:p-8 border border-white/5">
+                <div className="w-full space-y-4 md:space-y-6 lg:space-y-8 max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mb-6 bg-[#2e3733]/40 rounded-3xl p-5 md:p-7 lg:p-8 border border-white/5 shadow-xl">
                   {/* Game Mode Selection */}
                   <div className="flex flex-col gap-1.5 pb-2 border-b border-white/5 text-left">
                     <span className="text-[#6e847c] font-mono text-xs uppercase tracking-wider">Training Mode:</span>
                     <div className="flex gap-2 mt-1">
                       <button
                         onClick={() => setGameMode("dual")}
-                        className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
+                        className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
                           gameMode === "dual"
                             ? "bg-[#8ba99b] text-[#1a1f1d] shadow-md shadow-[#8ba99b]/20 font-bold border border-transparent"
                             : "bg-[#2e3733] border border-white/5 text-[#6e847c] hover:text-[#e0e5e1] hover:bg-white/5"
@@ -1066,7 +1066,7 @@ export default function App() {
                       </button>
                       <button
                         onClick={() => setGameMode("triple")}
-                        className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
+                        className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
                           gameMode === "triple"
                             ? "bg-[#8ba99b] text-[#1a1f1d] shadow-md shadow-[#8ba99b]/20 font-bold border border-transparent"
                             : "bg-[#2e3733] border border-white/5 text-[#6e847c] hover:text-[#e0e5e1] hover:bg-white/5"
@@ -1079,20 +1079,20 @@ export default function App() {
 
                   {/* Level Slider Selection */}
                   <div className="flex flex-col gap-1.5 text-left">
-                    <div className="flex justify-between text-xs">
+                    <div className="flex justify-between text-xs sm:text-sm">
                       <span className="text-[#6e847c] font-mono uppercase tracking-wider">Memory Depth (N-Level):</span>
-                      <span className="font-mono font-bold text-[#8ba99b] bg-[#8ba99b]/10 px-2 py-0.5 rounded-md">
+                      <span className="font-mono font-bold text-[#8ba99b] bg-[#8ba99b]/10 px-2.5 py-0.5 rounded-md">
                         {nLevel}-Back
                       </span>
                     </div>
-                    <div className="grid grid-cols-4 gap-1 md:gap-2 mt-1">
+                    <div className="grid grid-cols-4 gap-1.5 md:gap-2 mt-1">
                       {Array.from({ length: 8 }).map((_, i) => {
                         const val = i + 1;
                         return (
                           <button
                             key={val}
                             onClick={() => setNLevel(val)}
-                            className={`py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer ${
+                            className={`py-2 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all cursor-pointer ${
                               nLevel === val
                                 ? "bg-[#8ba99b] text-[#1a1f1d] shadow-md shadow-[#8ba99b]/20 font-bold border border-transparent"
                                 : "bg-[#2e3733] border border-white/5 text-[#6e847c] hover:text-[#e0e5e1] hover:bg-white/5"
@@ -1107,9 +1107,9 @@ export default function App() {
 
                   {/* Interval Speed Input */}
                   <div className="flex flex-col gap-1.5 pt-2">
-                    <div className="flex justify-between items-center text-xs">
+                    <div className="flex justify-between items-center text-xs sm:text-sm">
                       <span className="text-[#6e847c] font-mono uppercase tracking-wider">Interval Speed:</span>
-                      <span className="font-mono font-bold text-[#d4a373] bg-[#d4a373]/10 px-2 py-0.5 rounded-md">
+                      <span className="font-mono font-bold text-[#d4a373] bg-[#d4a373]/10 px-2.5 py-0.5 rounded-md">
                         {formatSpeed(speedSeconds)}s
                       </span>
                     </div>
@@ -1120,16 +1120,16 @@ export default function App() {
                       step="0.1"
                       value={speedSeconds}
                       onChange={(e) => setSpeedSeconds(parseFloat(e.target.value))}
-                      className="w-full accent-[#8ba99b] cursor-pointer h-1.5 bg-[#1a1f1d] rounded-lg appearance-none"
+                      className="zen-slider"
                     />
-                    <div className="flex justify-between text-[10px] md:text-xs text-[#6e847c] font-mono px-0.5 mt-0.5">
+                    <div className="flex justify-between text-[10px] sm:text-xs text-[#6e847c] font-mono px-0.5 mt-0.5">
                       <span>1.5s (Faster)</span>
                       <span>4.0s (Relaxed)</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="w-full max-w-sm md:max-w-md lg:max-w-xl">
+                <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
                   <button
                     id="menu-start-btn"
                     onClick={startNewSession}
