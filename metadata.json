@@ -1,6 +1,6 @@
 {
-  "name": "Zen N-Back",
-  "description": "A calm, responsive N-Back practice for building working memory one intentional moment at a time.",
+  "name": "N-Back",
+  "description": "A beautiful, meditative dual N-back cognitive training game with sound, custom grids, and dynamic, flowing background colors.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

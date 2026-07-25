@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -21,8 +21,6 @@ interface TutorialModalProps {
   dontShowAgain: boolean;
   onToggleDontShowAgain: (checked: boolean) => void;
   onStartGame?: () => void;
-  canStartGame?: boolean;
-  gameMode?: "dual" | "triple";
 }
 
 export const TutorialModal: React.FC<TutorialModalProps> = ({
@@ -30,17 +28,9 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
   onClose,
   dontShowAgain,
   onToggleDontShowAgain,
-  onStartGame,
-  canStartGame = true,
-  gameMode = "dual"
+  onStartGame
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-
-  useEffect(() => {
-    if (isOpen) {
-      setCurrentStep(0);
-    }
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -51,7 +41,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
       setCurrentStep(prev => prev + 1);
     } else {
       onClose();
-      if (canStartGame && onStartGame) onStartGame();
+      if (onStartGame) onStartGame();
     }
   };
 
@@ -78,7 +68,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <Brain className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg md:text-xl font-bold text-[#e0e5e1]">How to Play {gameMode === "triple" ? "Triple" : "Dual"} N-Back</h3>
+                <h3 className="text-lg md:text-xl font-bold text-[#e0e5e1]">How to Play Dual N-Back</h3>
                 <p className="text-xs text-[#6e847c] font-mono">Step {currentStep + 1} of {totalSteps}</p>
               </div>
             </div>
@@ -116,8 +106,8 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <div className="bg-[#8ba99b]/10 border border-[#8ba99b]/20 rounded-2xl p-4 text-xs md:text-sm leading-relaxed text-[#e0e5e1]/90 flex items-start gap-3">
                   <Sparkles className="w-5 h-5 text-[#8ba99b] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-[#8ba99b] block mb-1">What is N-Back?</strong>
-                    N-Back is a working-memory exercise. In Dual mode you track two streams simultaneously: <span className="text-[#8ba99b] font-semibold">Grid Position</span> and <span className="text-[#d4a373] font-semibold">Spoken Letter</span>. Triple mode adds the tile color.
+                    <strong className="text-[#8ba99b] block mb-1">What is Dual N-Back?</strong>
+                    Dual N-Back is a cognitive exercise designed to expand your working memory and fluid intelligence. You track two streams of information simultaneously: <span className="text-[#8ba99b] font-semibold">Grid Position</span> and <span className="text-[#d4a373] font-semibold">Spoken Letter</span>.
                   </div>
                 </div>
 
@@ -125,10 +115,6 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                   <h4 className="text-xs font-mono uppercase tracking-wider text-[#6e847c]">The Core Rule (N-Back):</h4>
                   <p className="text-xs md:text-sm text-[#e0e5e1]/80 leading-relaxed">
                     In <strong className="text-[#8ba99b]">2-Back</strong> mode, you compare the CURRENT grid position and letter to what appeared <strong className="text-[#8ba99b]">EXACTLY 2 STEPS AGO</strong>.
-                  </p>
-
-                  <p className="text-xs md:text-sm text-[#e0e5e1]/80 leading-relaxed">
-                    The first <strong className="text-[#8ba99b]">N trials are warm-up</strong> while enough history builds up. Since not every trial contains a match, <strong className="text-[#8ba99b]">not pressing is often correct</strong>.
                   </p>
 
                   <div className="grid grid-cols-3 gap-2 pt-2 text-center font-mono text-[11px]">
@@ -140,7 +126,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                     <div className="bg-[#1a1f1d] p-2.5 rounded-xl border border-white/5 opacity-60">
                       <span className="text-[#6e847c] block text-[9px] uppercase">Step 2</span>
                       <span className="text-[#e0e5e1] font-bold">Center</span>
-                      <span className="text-[#d4a373] block text-[10px]">"R"</span>
+                      <span className="text-[#d4a373] block text-[10px]">"K"</span>
                     </div>
                     <div className="bg-[#8ba99b]/15 p-2.5 rounded-xl border border-[#8ba99b]/30">
                       <span className="text-[#8ba99b] block text-[9px] uppercase font-bold">Step 3 (Current)</span>
@@ -356,14 +342,10 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 className="flex-1 sm:flex-none px-5 py-2 rounded-xl bg-[#8ba99b] hover:bg-[#a8c1b5] text-[#1a1f1d] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-[#8ba99b]/20 transition-all cursor-pointer"
               >
                 {currentStep === totalSteps - 1 ? (
-                  canStartGame ? (
-                    <>
-                      <span>Got It & Play</span>
-                      <Play className="w-3.5 h-3.5 fill-[#1a1f1d]" />
-                    </>
-                  ) : (
-                    <span>Done</span>
-                  )
+                  <>
+                    <span>Got It & Play</span>
+                    <Play className="w-3.5 h-3.5 fill-[#1a1f1d]" />
+                  </>
                 ) : (
                   <>
                     <span>Next</span>
