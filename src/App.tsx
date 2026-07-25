@@ -875,7 +875,13 @@ export default function App() {
       </div>
 
       <header className="w-full max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl flex items-center justify-between z-10 mb-4 px-2 md:px-4">
-        <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-[#8ba99b] to-[#a8c1b5] bg-clip-text text-transparent">N-Back</h1>
+        <div className="flex items-center gap-2.5">
+          <img src="/zen-n-back-icon.svg" alt="" className="w-8 h-8 rounded-[10px] shadow-lg shadow-[#8ba99b]/10" />
+          <div className="leading-none">
+            <span className="block text-[9px] font-mono uppercase tracking-[0.2em] text-[#6e847c] mb-1">Mindful training</span>
+            <h1 className="text-sm font-bold tracking-tight bg-gradient-to-r from-[#8ba99b] to-[#a8c1b5] bg-clip-text text-transparent">Zen N-Back</h1>
+          </div>
+        </div>
         <div className="flex items-center gap-2">
           <button onClick={openTutorial} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 text-xs font-medium text-[#e0e5e1]/80 hover:text-[#8ba99b] hover:border-[#8ba99b]/30 hover:bg-[#8ba99b]/5 transition-all duration-300 cursor-pointer" title="How to Play Tutorial">
             <HelpCircle className="w-3.5 h-3.5 text-[#8ba99b]" />
@@ -897,6 +903,25 @@ export default function App() {
           <AnimatePresence mode="wait">
             {gameState === "menu" && (
               <motion.div key="menu" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-col items-center text-center py-4">
+                <div className="w-full max-w-sm md:max-w-md lg:max-w-xl mb-7 md:mb-9">
+                  <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} className="relative mx-auto mb-5 w-24 h-24 md:w-28 md:h-28">
+                    <div className="absolute inset-1 rounded-[2rem] bg-[#8ba99b]/10 blur-xl animate-pulse" />
+                    <img src="/zen-n-back-icon.svg" alt="Zen N-Back focus mark" className="relative w-full h-full rounded-[2rem] border border-[#8ba99b]/25 shadow-2xl shadow-black/30" />
+                  </motion.div>
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <span className="h-px w-7 bg-[#8ba99b]/40" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#8ba99b]">A quiet practice for a busy mind</span>
+                    <span className="h-px w-7 bg-[#8ba99b]/40" />
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-serif italic leading-[1.05] tracking-tight text-[#e0e5e1]">Train your mind.<br /><span className="text-[#8ba99b]">Stay present.</span></h2>
+                  <p className="mt-4 mx-auto max-w-md text-sm md:text-base leading-relaxed text-[#aab8b0]">A calm, responsive N-Back practice for building working memory one intentional moment at a time.</p>
+                  <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
+                    <span className="rounded-full border border-[#8ba99b]/20 bg-[#8ba99b]/5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#8ba99b]">Dual + Triple modes</span>
+                    <span className="rounded-full border border-[#d4a373]/20 bg-[#d4a373]/5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#d4a373]">Built for focus</span>
+                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#aab8b0]">Private by design</span>
+                  </div>
+                </div>
+
                 <div className="w-full space-y-4 md:space-y-6 max-w-sm md:max-w-md lg:max-w-xl mb-6 bg-[#2e3733]/40 rounded-3xl p-4 md:p-6 lg:p-8 border border-white/5">
                   <div className="flex flex-col gap-1.5 pb-2 border-b border-white/5 text-left">
                     <span className="text-[#6e847c] font-mono text-xs uppercase tracking-wider">Training Mode:</span>
