@@ -333,16 +333,19 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 
           {/* Footer Navigation & "Don't show again" */}
           <div className="pt-4 mt-2 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <label className="flex items-center gap-2 cursor-pointer text-xs text-[#6e847c] hover:text-[#e0e5e1] transition-colors select-none self-start sm:self-center">
-              <input
-                id="dont-show-again-checkbox"
-                type="checkbox"
-                checked={dontShowAgain}
-                onChange={(e) => onToggleDontShowAgain(e.target.checked)}
-                className="w-4 h-4 rounded bg-[#2e3733] border-white/20 text-[#8ba99b] focus:ring-0 focus:ring-offset-0 accent-[#8ba99b] cursor-pointer"
-              />
+            <button
+              id="dont-show-again-btn"
+              type="button"
+              onClick={() => {
+                onToggleDontShowAgain(true);
+                onClose();
+              }}
+              className="px-3.5 py-1.5 rounded-xl border border-white/10 bg-[#2e3733]/60 hover:bg-white/10 text-[#6e847c] hover:text-[#e0e5e1] text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer select-none self-start sm:self-center"
+              title="Don't show automatically on start and exit tutorial"
+            >
+              <X className="w-3.5 h-3.5" />
               <span>Don't show automatically on start</span>
-            </label>
+            </button>
 
             <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
               {currentStep > 0 && (
