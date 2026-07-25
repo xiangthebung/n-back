@@ -1,0 +1,6 @@
+{
+  "name": "N-Back",
+  "description": "A beautiful, meditative dual N-back cognitive training game with sound, custom grids, and dynamic, flowing background colors.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
