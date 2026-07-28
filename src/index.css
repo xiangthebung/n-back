@@ -1,128 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Custom breathing animations for a rich Zen feeling */
-  @keyframes breathe-glow {
-    0%, 100% {
-      opacity: 0.15;
-      transform: scale(1) translate(-50%, -50%);
-    }
-    50% {
-      opacity: 0.3;
-      transform: scale(1.15) translate(-50%, -50%);
-    }
-  }
+  /* Surfaces */
+  --color-canvas: #0a0d0c;
+  --color-surface: #131917;
+  --color-raised: #1b2320;
+  --color-line: #2b3531;
 
-  @keyframes pulse-ring {
-    0% {
-      transform: scale(0.95);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(0.95);
-      opacity: 0.5;
-    }
-  }
+  /* Text */
+  --color-ink: #e9efec;
+  --color-muted: #a9b6b0;
+  --color-faint: #82908a;
 
-  --animate-breathe-glow: breathe-glow 10s ease-in-out infinite;
-  --animate-pulse-ring: pulse-ring 4s ease-in-out infinite;
+  /* Accents */
+  --color-sage: #8fb5a3;
+  --color-sage-soft: #bcd8c9;
+  --color-amber: #dfa65c;
+  --color-rose: #d98a95;
+  --color-sky: #8fadd4;
 }
 
-body {
-  background-color: #0c0f0e;
-  color: #e0e5e1;
-  font-family: var(--font-sans);
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
+  }
+
+  button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 3px;
+  }
+
+  /* Never leave a focused element without a visible ring, even inside dark glass panels. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
-/* Hide default select arrows beautifully */
-select {
+/* Keyboard hints are only meaningful where a physical keyboard is likely. */
+.kbd-hint {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kbd-hint {
+    display: inline-flex;
+  }
+}
+
+/* Numeric readouts stay steady while values change. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* --- Pace slider ------------------------------------------------------- */
+.pace-slider {
+  --range-fill: 50%;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-}
-
-/* Custom styling for range input sliders to ensure cross-browser visibility */
-input[type="range"].zen-slider {
   -webkit-appearance: none;
-  appearance: none;
+  width: 100%;
+  height: 28px;
   background: transparent;
-  width: 100%;
-  height: 24px;
   cursor: pointer;
-  margin: 4px 0;
 }
 
-/* Track styling */
-input[type="range"].zen-slider::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8px;
-  background: #1a2420;
-  border: 1px solid rgba(139, 169, 155, 0.25);
+.pace-slider::-webkit-slider-runnable-track {
+  height: 6px;
   border-radius: 9999px;
-  transition: all 0.2s ease;
+  background: linear-gradient(
+    to right,
+    var(--color-sage) 0%,
+    var(--color-sage) var(--range-fill),
+    rgba(255, 255, 255, 0.09) var(--range-fill),
+    rgba(255, 255, 255, 0.09) 100%
+  );
 }
 
-input[type="range"].zen-slider:hover::-webkit-slider-runnable-track {
-  background: #23302a;
-  border-color: rgba(139, 169, 155, 0.45);
-}
-
-input[type="range"].zen-slider::-moz-range-track {
-  width: 100%;
-  height: 8px;
-  background: #1a2420;
-  border: 1px solid rgba(139, 169, 155, 0.25);
+.pace-slider::-moz-range-track {
+  height: 6px;
   border-radius: 9999px;
-  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.09);
 }
 
-/* Thumb styling */
-input[type="range"].zen-slider::-webkit-slider-thumb {
+.pace-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-sage);
+}
+
+.pace-slider::-webkit-slider-thumb {
+  appearance: none;
   -webkit-appearance: none;
-  appearance: none;
-  margin-top: -6px; /* (8px track - 20px thumb) / 2 = -6px */
-  height: 20px;
-  width: 20px;
+  margin-top: -8px;
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
-  background-color: #8ba99b;
-  border: 2px solid #0c0f0e;
-  box-shadow: 0 0 12px rgba(139, 169, 155, 0.6);
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  background: #f2f7f4;
+  border: none;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
 }
 
-input[type="range"].zen-slider:hover::-webkit-slider-thumb {
-  transform: scale(1.2);
-  background-color: #a8c1b5;
-  box-shadow: 0 0 16px rgba(139, 169, 155, 0.9);
-}
-
-input[type="range"].zen-slider::-moz-range-thumb {
-  appearance: none;
-  height: 20px;
-  width: 20px;
+.pace-slider::-moz-range-thumb {
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
-  background-color: #8ba99b;
-  border: 2px solid #0c0f0e;
-  box-shadow: 0 0 12px rgba(139, 169, 155, 0.6);
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  background: #f2f7f4;
+  border: none;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
 }
 
-input[type="range"].zen-slider:hover::-moz-range-thumb {
-  transform: scale(1.2);
-  background-color: #a8c1b5;
-  box-shadow: 0 0 16px rgba(139, 169, 155, 0.9);
+.pace-slider:active::-webkit-slider-thumb {
+  transform: scale(1.12);
 }
 
+.pace-slider:active::-moz-range-thumb {
+  transform: scale(1.12);
+}
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
