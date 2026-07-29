@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: typecheck + tests + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # lint (tsc --noEmit), then the sequence and scoring tests, then the Vite
+      # build. The tests are the reason this workflow is worth having: the two
+      # things the game promises -- an exact number of matches per stream, and a
+      # score that cannot be gamed by pressing everything -- are pure functions,
+      # and a change to either is silent without them.
+      - run: npm run verify
